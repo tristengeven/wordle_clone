@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className=" text-xl">Wordel</h1>
+      <h1 className=" text-2xl">Wordle Clone</h1>
       {/* {solution && <div>Solution: {solution}</div>} */}
       {solution && <Wordle solution={solution} />}
     </div>

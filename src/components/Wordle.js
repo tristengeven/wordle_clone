@@ -21,8 +21,8 @@ export default function Wordle({ solution }) {
 
   return (
     <div className=" border-black">
-      <div className="  text-lg">(Wordle Component) Solution: {solution}</div>
-      <div className=" bg-slate-300">Current guess: {currentGuess}</div>
+      {/* <div className="  text-lg">(Wordle Component) Solution: {solution}</div> */}
+      {/* <div className=" bg-slate-300">Current guess: {currentGuess}</div> */}
       {/* three variables made available to Grid component */}
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
     </div>
