@@ -15,7 +15,6 @@ h1 {
   margin: 0 0 30px 0;
   color: #333;
 }
-
 /* rows */
 .row {
   text-align: center;
@@ -35,14 +34,54 @@ h1 {
   font-size: 2.5em;
 }
 .row > div.green {
-  background: #5ac85a;
-  border-color: #5ac85a;
+  --background: #5ac85a;
+  --border-color: #5ac85a;
+  animation: flip 0.6s ease forwards;
 }
 .row > div.gray {
-  background: #a1a1a1;
-  border-color: #a1a1a1;
+  --background: #a1a1a1;
+  --border-color: #a1a1a1;
+  animation: flip 0.6s ease forwards;
 }
 .row > div.yellow {
-  background: #e2cc68;
-  border-color: #e2cc68;
+  --background: #e2cc68;
+  --border-color: #e2cc68;
+  animation: flip 0.6s ease forwards;
+}
+.row > div:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.row > div:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.row > div:nth-child(4) {
+  animation-delay: 0.9s;
+}
+.row > div:nth-child(5) {
+  animation-delay: 1.2s;
+}
+
+/* keyframe animations */
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+    background: #fff;
+    border-color: #333;
+  }
+  45% {
+    transform: rotateX(90deg);
+    background: white;
+    border-color: #333;
+  }
+  55% {
+    transform: rotateX(90deg);
+    background: var(--background);
+    border-color: var(--border-color);
+  }
+  100% {
+    transform: rotateX(0deg);
+    background: var(--background);
+    border-color: var(--border-color);
+    color: #eee;
+  }
 }
