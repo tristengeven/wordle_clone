@@ -13,7 +13,7 @@ function App() {
       .then((res) => res.json())
       .then((json) => {
         //get random solution from api list
-        console.log(json);
+        // console.log(json);
         const apiSolution = json.Response;
         setSolution(apiSolution);
         // const randomWord = json[Math.floor(Math.random() * json.length)];
