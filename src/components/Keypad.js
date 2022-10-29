@@ -31,14 +31,20 @@ export default function Keypad({ usedKeys }) {
       { key: "r" },
       { key: "s" },
       { key: "t" },
+      { key: "Backspace" },
       { key: "u" },
       { key: "v" },
       { key: "w" },
       { key: "x" },
       { key: "y" },
       { key: "z" },
+      { key: "Enter" },
     ]);
   }, []);
+
+  const handleButtonClick = (event, keyPressed) => {
+    window.dispatchEvent(new KeyboardEvent("keyup", { key: keyPressed }));
+  };
 
   return (
     <div className="keypad">
@@ -46,9 +52,23 @@ export default function Keypad({ usedKeys }) {
         letters.map((l) => {
           const color = usedKeys[l.key];
           return (
-            <div key={l.key} className={color}>
-              {l.key}
-            </div>
+            <button onClick={(event) => handleButtonClick(event, l.key)}>
+              {l.key !== "Enter" && l.key !== "Backspace" && (
+                <div key={l.key} className={color}>
+                  {l.key}
+                </div>
+              )}
+              {l.key === "Enter" && (
+                <div key={l.key} className={color}>
+                  Ent
+                </div>
+              )}
+              {l.key === "Backspace" && (
+                <div key={l.key} className={color}>
+                  Bck
+                </div>
+              )}
+            </button>
           );
         })}
     </div>
