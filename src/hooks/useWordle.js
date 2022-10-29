@@ -65,28 +65,25 @@ const useWordle = (solution) => {
       // increment turn
       return prevTurn + 1;
     });
-    setUsedKeys((prevKeys) => {
-      var newKeys = { ...prevKeys };
-      formattedGuess.forEach((letter) => {
-        var currentColor = newKeys[letter.key];
-        if (letter.color === "green") {
-          newKeys[letter.key] = "green";
+    setUsedKeys((prevUsedKeys) => {
+      formattedGuess.forEach((l) => {
+        const currentColor = prevUsedKeys[l.key]; // l.key is a letter, which corresponds to the key of the prevUsedKeys object
+
+        if (l.color === "green") {
+          prevUsedKeys[l.key] = "green";
           return;
         }
-        if (letter.color === "yellow" && currentColor !== "green") {
-          newKeys[letter.key] = "yellow";
+        if (l.color === "yellow" && currentColor !== "green") {
+          prevUsedKeys[l.key] = "yellow";
           return;
         }
-        if (
-          letter.color === "gray" &&
-          currentColor !== "green" &&
-          currentColor !== "yellow"
-        ) {
-          newKeys[letter.key] = "gray";
+        if (l.color === "gray" && currentColor !== ("green" || "yellow")) {
+          prevUsedKeys[l.key] = "gray";
           return;
         }
-        return newKeys;
       });
+
+      return prevUsedKeys;
     });
 
     // reset current guess
