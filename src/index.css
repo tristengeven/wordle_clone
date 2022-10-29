@@ -64,7 +64,17 @@ h1 {
   max-width: 500px;
   margin: 20px auto;
 }
-.keypad > div {
+
+.keypad > button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.keypad > button > div {
   margin: 5px;
   width: 40px;
   height: 50px;
@@ -72,18 +82,20 @@ h1 {
   display: inline-block;
   border-radius: 6px;
   line-height: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
-.keypad > div.green {
+.keypad > button > div.green {
   background: #5ac85a;
   color: #fff;
   transition: all 0.3s ease-in;
 }
-.keypad > div.yellow {
+.keypad > button > div.yellow {
   background: #e2cc68;
   color: #fff;
   transition: all 0.3s ease-in;
 }
-.keypad > div.gray {
+.keypad > button > div.gray {
   background: #a1a1a1;
   color: #fff;
   transition: all 0.3s ease-in;
