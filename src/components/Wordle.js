@@ -1,24 +1,34 @@
 // entire ui of game will exist here or nested
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useWordle from "../hooks/useWordle";
 import Grid from "./Grid";
 import Keypad from "./Keypad";
+import Modal from "./Modal";
 
 // solution is one retrieved by App component
 export default function Wordle({ solution }) {
   const { currentGuess, handleKeyup, guesses, turn, isCorrect, usedKeys } =
     useWordle(solution); // we passed the solution from App component to Wordle component, and then we give the useWordle Hook the solution from this component
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
 
+    // end game on isCorrect
+    if (isCorrect) {
+      setTimeout(() => setShowModal(true), 2000);
+      window.removeEventListener("keyup", handleKeyup); // detach event listener so they can't add anymore letters
+    }
+
+    // end if turns is over 5
+    if (turn > 5) {
+      setTimeout(() => setShowModal(true), 2000);
+      window.removeEventListener("keyup", handleKeyup);
+    }
+
     // prevents us from having a ton of eventListeners out during key presses
     return () => window.removeEventListener("keyup", handleKeyup);
-  }, [handleKeyup]);
-
-  useEffect(() => {
-    console.log(guesses, turn, isCorrect);
-  }, [guesses, turn, isCorrect]);
+  }, [handleKeyup, isCorrect, turn]);
 
   return (
     <div className=" border-black">
@@ -27,6 +37,9 @@ export default function Wordle({ solution }) {
       {/* three variables made available to Grid component */}
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
       <Keypad usedKeys={usedKeys} />
+      {showModal && (
+        <Modal isCorrect={isCorrect} turn={turn} solution={solution} />
+      )}
     </div>
   );
 }
