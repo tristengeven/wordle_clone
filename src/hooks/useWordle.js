@@ -8,6 +8,7 @@ const useWordle = (solution) => {
   const [guesses, setGuesses] = useState([...Array(6)]); // formatted guesses as an array, updated by formatGuess
   const [history, setHistory] = useState([]); // past guesses as strings, separate to check for duplicate guesses
   const [isCorrect, setIsCorrect] = useState(false); // only changed if user wins game, allows us to show congrats
+  const [usedKeys, setUsedKeys] = useState({}); // track keys used and what color they should be
 
   // format a guess into array of letter objects with keys and colors
   // [{key: 'a', color: 'yellow'}]
@@ -64,6 +65,30 @@ const useWordle = (solution) => {
       // increment turn
       return prevTurn + 1;
     });
+    setUsedKeys((prevKeys) => {
+      var newKeys = { ...prevKeys };
+      formattedGuess.forEach((letter) => {
+        var currentColor = newKeys[letter.key];
+        if (letter.color === "green") {
+          newKeys[letter.key] = "green";
+          return;
+        }
+        if (letter.color === "yellow" && currentColor !== "green") {
+          newKeys[letter.key] = "yellow";
+          return;
+        }
+        if (
+          letter.color === "gray" &&
+          currentColor !== "green" &&
+          currentColor !== "yellow"
+        ) {
+          newKeys[letter.key] = "gray";
+          return;
+        }
+        return newKeys;
+      });
+    });
+
     // reset current guess
     setCurrentGuess("");
   };
@@ -113,7 +138,7 @@ const useWordle = (solution) => {
     }
   };
 
-  return { turn, currentGuess, guesses, isCorrect, handleKeyup }; // handleKeyup will be called from outside this hook so we need to return it
+  return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup }; // handleKeyup will be called from outside this hook so we need to return it
 };
 
 export default useWordle;

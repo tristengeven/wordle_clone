@@ -2,10 +2,11 @@
 import React, { useEffect } from "react";
 import useWordle from "../hooks/useWordle";
 import Grid from "./Grid";
+import Keypad from "./Keypad";
 
 // solution is one retrieved by App component
 export default function Wordle({ solution }) {
-  const { currentGuess, handleKeyup, guesses, turn, isCorrect } =
+  const { currentGuess, handleKeyup, guesses, turn, isCorrect, usedKeys } =
     useWordle(solution); // we passed the solution from App component to Wordle component, and then we give the useWordle Hook the solution from this component
 
   useEffect(() => {
@@ -25,6 +26,7 @@ export default function Wordle({ solution }) {
       {/* <div className=" bg-slate-300">Current guess: {currentGuess}</div> */}
       {/* three variables made available to Grid component */}
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
+      <Keypad usedKeys={usedKeys} />
     </div>
   );
 }
