@@ -106,7 +106,7 @@ const useWordle = (solution) => {
         return;
       }
       // ensure guess is 5 chars long
-      if (currentGuess.length != 5) {
+      if (currentGuess.length !== 5) {
         console.log("guess must be 5 letters!");
         return;
       }

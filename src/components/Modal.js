@@ -8,7 +8,7 @@ export default function Modal({ isCorrect, turn, solution }) {
           <h1>You won!</h1>
           <p>
             The solution was <span className="solution">{solution}</span>. You
-            found it in {turn == 1 && <span>1 guess.</span>}
+            found it in {turn === 1 && <span>1 guess.</span>}
             {turn > 1 && <span>{turn} guesses.</span>}
           </p>
         </div>

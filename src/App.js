@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Wordle from "./components/Wordle";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 
 function App() {
   // state-based game, where state of game is determined by a word to be solved
