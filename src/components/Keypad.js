@@ -65,7 +65,7 @@ export default function Keypad({ usedKeys }) {
               )}
               {l.key === "Backspace" && (
                 <div key={l.key} className={color}>
-                  Bck
+                  ←
                 </div>
               )}
             </button>
