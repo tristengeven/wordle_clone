@@ -31,7 +31,7 @@ export default function Wordle({ solution }) {
   }, [handleKeyup, isCorrect, turn]);
 
   return (
-    <div className=" border-black">
+    <div className="game_container">
       {/* <div className="  text-lg">(Wordle Component) Solution: {solution}</div> */}
       {/* <div className=" bg-slate-300">Current guess: {currentGuess}</div> */}
       {/* three variables made available to Grid component */}

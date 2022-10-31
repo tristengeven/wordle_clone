@@ -23,9 +23,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className=" text-2xl">Wordle Clone</h1>
+      <h1 className="app_title">Wordle Clone</h1>
       {/* {solution && <div>Solution: {solution}</div>} */}
-      {solution && <Wordle solution={solution} />}
+      {solution && <Wordle className="wordle_container" solution={solution} />}
     </div>
   );
 }
