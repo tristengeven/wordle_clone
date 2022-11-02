@@ -119,7 +119,7 @@ const useWordle = (solution) => {
       fetch(`https://thatwordleapi.azurewebsites.net/ask/?word=${currentGuess}`)
         .then((res) => res.json())
         .then((json) => {
-          if (json.Response == false) {
+          if (json.Response === false) {
             setIsNotWord(true);
             setTimeout(() => setIsNotWord(false), 1000);
             return;
