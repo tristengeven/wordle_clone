@@ -157,6 +157,22 @@ h1 {
   letter-spacing: 1px;
 }
 
+.not_word_modal {
+  background: rgba(255, 255, 255);
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+.not_word_modal > p {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: small;
+}
+
 /* keyframe animations */
 @keyframes flip {
   0% {

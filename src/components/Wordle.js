@@ -4,11 +4,19 @@ import useWordle from "../hooks/useWordle";
 import Grid from "./Grid";
 import Keypad from "./Keypad";
 import Modal from "./Modal";
+import NotWordModal from "./NotWordModal";
 
 // solution is one retrieved by App component
 export default function Wordle({ solution }) {
-  const { currentGuess, handleKeyup, guesses, turn, isCorrect, usedKeys } =
-    useWordle(solution); // we passed the solution from App component to Wordle component, and then we give the useWordle Hook the solution from this component
+  const {
+    currentGuess,
+    handleKeyup,
+    guesses,
+    turn,
+    isCorrect,
+    isNotWord,
+    usedKeys,
+  } = useWordle(solution); // we passed the solution from App component to Wordle component, and then we give the useWordle Hook the solution from this component
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -35,6 +43,7 @@ export default function Wordle({ solution }) {
       {/* <div className="  text-lg">(Wordle Component) Solution: {solution}</div> */}
       {/* <div className=" bg-slate-300">Current guess: {currentGuess}</div> */}
       {/* three variables made available to Grid component */}
+      {isNotWord && <NotWordModal />}
       <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
       <Keypad usedKeys={usedKeys} />
       {showModal && (

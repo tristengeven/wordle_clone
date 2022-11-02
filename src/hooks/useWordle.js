@@ -9,6 +9,7 @@ const useWordle = (solution) => {
   const [history, setHistory] = useState([]); // past guesses as strings, separate to check for duplicate guesses
   const [isCorrect, setIsCorrect] = useState(false); // only changed if user wins game, allows us to show congrats
   const [usedKeys, setUsedKeys] = useState({}); // track keys used and what color they should be
+  const [isNotWord, setIsNotWord] = useState(false); // track if guess entered is not a valid word
 
   // format a guess into array of letter objects with keys and colors
   // [{key: 'a', color: 'yellow'}]
@@ -114,9 +115,20 @@ const useWordle = (solution) => {
         console.log("guess must be 5 letters!");
         return;
       }
-      // if here, guess is valid
-      var formatted = formatGuess(); // we don't need to pass currentGuess as argument because we can access it from the state
-      addNewGuess(formatted);
+      // ensure guess is a real word
+      fetch(`https://thatwordleapi.azurewebsites.net/ask/?word=${currentGuess}`)
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.Response == false) {
+            setIsNotWord(true);
+            setTimeout(() => setIsNotWord(false), 1000);
+            return;
+          } else {
+            // if here, guess is valid
+            var formatted = formatGuess(); // we don't need to pass currentGuess as argument because we can access it from the state
+            addNewGuess(formatted);
+          }
+        });
     }
 
     // check if key is Backspace, to remove letter
@@ -139,7 +151,15 @@ const useWordle = (solution) => {
     }
   };
 
-  return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup }; // handleKeyup will be called from outside this hook so we need to return it
+  return {
+    turn,
+    currentGuess,
+    guesses,
+    isCorrect,
+    isNotWord,
+    usedKeys,
+    handleKeyup,
+  }; // handleKeyup will be called from outside this hook so we need to return it
 };
 
 export default useWordle;
