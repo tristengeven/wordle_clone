@@ -173,6 +173,10 @@ h1 {
   font-size: small;
 }
 
+.not_word_row {
+  animation: wiggle 0.5s;
+}
+
 /* keyframe animations */
 @keyframes flip {
   0% {
@@ -209,5 +213,23 @@ h1 {
   100% {
     transform: scale(1);
     border-color: #333;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: translateX(-5px);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0px);
   }
 }

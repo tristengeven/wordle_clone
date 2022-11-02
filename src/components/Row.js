@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Row({ guess, currentGuess }) {
+export default function Row({ guess, currentGuess, isNotWord }) {
   if (guess) {
     // here we would have a guess, but no currentGuess
     return (
@@ -18,19 +18,35 @@ export default function Row({ guess, currentGuess }) {
     // here we would have a currentGuess, but no guess
     var letters = currentGuess.split("");
 
-    return (
-      <div className="row current">
-        {letters.map((letter, index) => (
-          <div key={index} className="filled">
-            {letter}
-          </div>
-        ))}
-        {/* number of blank squares should be equal to 5 - current guesses letters */}
-        {[...Array(5 - letters.length)].map((_, index) => (
-          <div key={index}></div>
-        ))}
-      </div>
-    );
+    if (!isNotWord) {
+      return (
+        <div className="row current">
+          {letters.map((letter, index) => (
+            <div key={index} className="filled">
+              {letter}
+            </div>
+          ))}
+          {/* number of blank squares should be equal to 5 - current guesses letters */}
+          {[...Array(5 - letters.length)].map((_, index) => (
+            <div key={index}></div>
+          ))}
+        </div>
+      );
+    } else {
+      return (
+        <div className="row current not_word_row">
+          {letters.map((letter, index) => (
+            <div key={index} className="filled">
+              {letter}
+            </div>
+          ))}
+          {/* number of blank squares should be equal to 5 - current guesses letters */}
+          {[...Array(5 - letters.length)].map((_, index) => (
+            <div key={index}></div>
+          ))}
+        </div>
+      );
+    }
   }
 
   return (

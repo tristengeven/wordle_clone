@@ -44,7 +44,12 @@ export default function Wordle({ solution }) {
       {/* <div className=" bg-slate-300">Current guess: {currentGuess}</div> */}
       {/* three variables made available to Grid component */}
       {isNotWord && <NotWordModal />}
-      <Grid currentGuess={currentGuess} guesses={guesses} turn={turn} />
+      <Grid
+        currentGuess={currentGuess}
+        guesses={guesses}
+        turn={turn}
+        isNotWord={isNotWord}
+      />
       <Keypad usedKeys={usedKeys} />
       {showModal && (
         <Modal isCorrect={isCorrect} turn={turn} solution={solution} />
