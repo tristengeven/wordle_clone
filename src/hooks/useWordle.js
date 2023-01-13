@@ -116,10 +116,11 @@ const useWordle = (solution) => {
         return;
       }
       // ensure guess is a real word
-      fetch(`https://thatwordleapi.azurewebsites.net/ask/?word=${currentGuess}`)
+      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${currentGuess}`)
         .then((res) => res.json())
         .then((json) => {
-          if (json.Response === false) {
+          console.log(json.title);
+          if (json.title === "No Definitions Found") {
             setIsNotWord(true);
             setTimeout(() => setIsNotWord(false), 1000);
             return;

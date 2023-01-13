@@ -9,13 +9,13 @@ function App() {
   //execute once when page is rendered to get random word for game
   useEffect(() => {
     // fetch("http://localhost:3001/solutions")
-    fetch("https://thatwordleapi.azurewebsites.net/get/")
+    fetch("https://random-word-api.herokuapp.com/word?length=5")
       .then((res) => res.json())
       .then((json) => {
         //get random solution from api list
         // console.log(json);
-        const apiSolution = json.Response;
-        setSolution(apiSolution);
+        const apiSolution = json["0"];
+        setSolution(apiSolution ? apiSolution : "Heart");
         // const randomWord = json[Math.floor(Math.random() * json.length)];
         // setSolution(randomWord.word);
       });
